@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973262539}
   m_Layer: 0
-  m_Name: enemiestype1
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 1681164890}
   - component: {fileID: 1681164891}
   - component: {fileID: 1681164892}
+  - component: {fileID: 1681164893}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -250,6 +251,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fb9b898d554fa48aed67bb236b3e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1681164893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1681164889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebc12f1a322fd4c4bad64552d7ff281e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAge: 24
 --- !u!1 &1785942708
 GameObject:
   m_ObjectHideFlags: 0

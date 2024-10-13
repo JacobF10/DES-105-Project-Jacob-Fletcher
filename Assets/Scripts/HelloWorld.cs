@@ -4,38 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Your comment here
-
-/*
-Developed by: Hadi Mehrpouya
-Date Modified: 22/09/2023
-
-This is an age calculator!
- */
+// Developed by Jacob Fletcher
+//Date Modified 13/10/2024
+//This is my third try because my code broke for now reason.
 
 public class HelloWorld : MonoBehaviour 
 {
+    //This is an age calculator.
 
-    
-    //Write a code that prints the age difference between two living things!
-    int myAge = 88 ;
-    int oldestTreeAge = 4855;
+    int myAge = 24;
+    int ellaAge = 27;
+ 
 
 
 
-    // Start is called before the first frame update
+    // Start is exectutes the code before the very first frame.
 
     void Start()//Start function only runs once. 
     {
-        int ageDifference = oldestTreeAge - myAge ;
+        int ageDifference = ellaAge - myAge;
+        Debug.Log("The age differece is:" + ageDifference);
 
-
-        Debug.Log("The age difference is: " + ageDifference);
 
 
     }
 
-    // Update is called once per frame
+    // Update function executes code once every single frame.
     void Update()
     {
         
