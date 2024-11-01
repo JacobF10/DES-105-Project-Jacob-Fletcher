@@ -29,7 +29,7 @@ public class LectorialHelloWorld : MonoBehaviour
         int health=10;
         float Accuratehealth = 3.1f;
         string welcomeMessage = "Hello";
-        string userName = "Hadi";
+        string userName = "Jacob";
 
 
         print(welcomeMessage +": " + userName +  " your health is:" + health);

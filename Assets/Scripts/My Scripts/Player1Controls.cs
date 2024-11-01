@@ -5,13 +5,14 @@ using UnityEngine;
 public class Player1Controls : MonoBehaviour
 {
     Vector3 myMovement = new Vector3 (0, 0, 0);
-    public float mySpeed = 0.003f;
+    public float mySpeed = 0.1f;
     
     // Start is called before the first frame update
     void Start()
     {
        
     }
+    public void myFunction() { }
 
     // Update is called once per frame
     void Update()
