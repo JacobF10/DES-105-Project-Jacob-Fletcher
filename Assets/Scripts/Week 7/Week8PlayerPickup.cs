@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Week8PlayerPickup : MonoBehaviour
 {
+    HealthManager healthManager;
+    PlayerScore playerScore;
     // Start is called before the first frame update
     void Start()
     {
-        
+        healthManager = GetComponent<HealthManager>();
+        playerScore = GetComponent<PlayerScore>();
     }
     /*------- Week 7: ------  ------  Challenge 1 ------  ------  Intermediate ------
      * 1. Complete this example by creating 2 prefabs: HealthPickup and ScorePickup
@@ -24,11 +27,20 @@ public class Week8PlayerPickup : MonoBehaviour
             if(theOtherObject.gameObject.tag == "healthPickup") {
                 print("add to player health");
                 Destroy(theOtherObject.gameObject);
-            }
-            if (theOtherObject.gameObject.tag.Contains("scorePickup"))
+                healthManager.Heal(1f);
+                if (theOtherObject.gameObject.tag == "damagePickup")
+                {
+                    print("take away player health");
+                    Destroy(theOtherObject.gameObject);
+                    healthManager.TakeDamage(2f);
+                }
+            if (theOtherObject.gameObject.tag.Contains("MyCollectable"))
             {
                 print("add to player score");
-            }
+                    playerScore.ScoreNumber += 1;
+                    Destroy(theOtherObject.gameObject);
+                   playerScore.MyScoretext.text = "Score" + ScoreNumber;
+                }
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
