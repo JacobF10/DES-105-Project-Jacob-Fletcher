@@ -8,6 +8,7 @@ TagManager:
   - MyCollectable
   - healthPickup
   - damagePickup
+  - MaxHealth
   layers:
   - Default
   - TransparentFX

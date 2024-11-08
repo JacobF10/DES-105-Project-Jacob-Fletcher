@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCharacterController2 : MonoBehaviour
@@ -15,7 +16,8 @@ public class PlayerCharacterController2 : MonoBehaviour
     */
     float xMovement = 0;
     float jumpValue=0;
-    bool isOnGround = false;
+    bool isOnPlatform = false;
+    int TotalJumps = 2;
     Vector2 targetVelocity = new Vector2(0,0);
 
     public float movementSpeed = 0.5f;
@@ -27,6 +29,16 @@ public class PlayerCharacterController2 : MonoBehaviour
     {
         playerRigidBody = GetComponent<Rigidbody2D>();
     }
+    void AmountofJumps()
+    {//If the jump button is pressed and we have junps left.
+        if (Input.GetButtonDown("Jump") && TotalJumps > 0)
+        {
+            playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, jumpAmount);//Jump by setting upward velocity
+            TotalJumps--; //This uses up 1 jump
+                    
+        }
+    }
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -34,8 +46,9 @@ public class PlayerCharacterController2 : MonoBehaviour
         //playerRigidBody.AddForce(new Vector2(-2, 0), ForceMode2D.Impulse);
 
 
-        if (collision.gameObject.name.Contains("ground")) {
-            isOnGround = true;
+        if (collision.gameObject.name.Contains("Platform")) {
+            isOnPlatform = true;
+            TotalJumps = 2;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,24 +58,26 @@ public class PlayerCharacterController2 : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        print("you just left the triggere: " + collision.gameObject.name);
+        print("you just left the triggered: " + collision.gameObject.name);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Contains("ground"))
+        if (collision.gameObject.name.Contains("Platform"))
         {
-            isOnGround = false;
+            isOnPlatform = false;
+            
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        AmountofJumps();
     }
     private void FixedUpdate()
     {
         CheckInputs();
-        if (isOnGround)
+        if (isOnPlatform)
         {
             targetVelocity.Set(xMovement * movementSpeed, jumpValue * jumpAmount);
         }
@@ -71,6 +86,12 @@ public class PlayerCharacterController2 : MonoBehaviour
 
         }
         playerRigidBody.velocity += targetVelocity;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            targetVelocity.Set(xMovement * movementSpeed, jumpValue * jumpAmount);
+            playerRigidBody.velocity += targetVelocity * 2;
+        }
 
     }
 

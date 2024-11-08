@@ -6,11 +6,13 @@ public class Week8PlayerPickup : MonoBehaviour
 {
     HealthManager healthManager;
     PlayerScore playerScore;
+   
     // Start is called before the first frame update
     void Start()
     {
         healthManager = GetComponent<HealthManager>();
         playerScore = GetComponent<PlayerScore>();
+       
     }
     /*------- Week 7: ------  ------  Challenge 1 ------  ------  Intermediate ------
      * 1. Complete this example by creating 2 prefabs: HealthPickup and ScorePickup
@@ -24,32 +26,36 @@ public class Week8PlayerPickup : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D theOtherObject)
     {
         if (theOtherObject.gameObject.layer == 3) {// 3 means we are colliding with layer3: pickups
-            if(theOtherObject.gameObject.tag == "healthPickup") {
-                print("add to player health");
-                Destroy(theOtherObject.gameObject);
-                healthManager.Heal(1f);
-                if (theOtherObject.gameObject.tag == "damagePickup")
-                {
-                    print("take away player health");
-                    Destroy(theOtherObject.gameObject);
-                    healthManager.TakeDamage(2f);
-                }
-            if (theOtherObject.gameObject.tag.Contains("MyCollectable"))
+            if (theOtherObject.gameObject.tag.Contains("healthPickup"))
             {
-                print("add to player score");
-                    playerScore.ScoreNumber += 1;
-                    Destroy(theOtherObject.gameObject);
-                   playerScore.MyScoretext.text = "Score" + ScoreNumber;
-                }
+             print("add to player health");
+             Destroy(theOtherObject.gameObject);
+             healthManager.Heal(1f);
+            }
+              
+            if (theOtherObject.gameObject.tag.Contains("damagePickup"))
+            {
+             print("take away player health");
+             Destroy(theOtherObject.gameObject);
+             healthManager.TakeDamage(2f);
+            }
+            if (theOtherObject.gameObject.tag.Contains("MaxHealth"))
+            {
+                print("add to player health MAXED!");
+                Destroy(theOtherObject.gameObject);
+                healthManager.SetHealth(100f);
+            }
+           
         }
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        print("Still colliding with: " + collision.gameObject.name);
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
-        print("finished colliding with: " + collision.gameObject.name);
+        print("Finished colliding with: " + collision.gameObject.name);
+
     }
     // Update is called once per frame
     void Update()
