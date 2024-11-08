@@ -39,6 +39,10 @@ public class PlayerCharacterController : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("Player collided with something" + collision.gameObject.name);
+    }
     /*------- Week 6: ------  ------  Challenge 4 ------  ------  Easy ------
  * 1. Check when the player is pressing down the shiftkey and if so, double the player movementSpeed otherwise set movementSpeed = 0.5f
  * 2. Set player health from the start function here. 

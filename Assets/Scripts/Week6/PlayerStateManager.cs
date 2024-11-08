@@ -16,7 +16,7 @@ public class PlayerStateManager : MonoBehaviour
    
     void Start()
     {
-        playerHealthManager.GetComponent<HealthManager>();
+        playerHealthManager = GetComponent<HealthManager>();
         print(playerHealthManager.GetHealth());
 
       
