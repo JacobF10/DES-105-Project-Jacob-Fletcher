@@ -9,6 +9,7 @@ TagManager:
   - healthPickup
   - damagePickup
   - MaxHealth
+  - Bouncy
   layers:
   - Default
   - TransparentFX

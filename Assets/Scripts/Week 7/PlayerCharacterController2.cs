@@ -19,9 +19,9 @@ public class PlayerCharacterController2 : MonoBehaviour
     bool isOnPlatform = false;
     int TotalJumps = 2;
     Vector2 targetVelocity = new Vector2(0,0);
-
+    public float BounceForce = 50.0f;
     public float movementSpeed = 0.5f;
-    public float jumpAmount = 0.001f;
+    public float jumpAmount = 0.5f;
 
     Rigidbody2D playerRigidBody;
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class PlayerCharacterController2 : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody2D>();
     }
     void AmountofJumps()
-    {//If the jump button is pressed and we have junps left.
+    {//If the jump button is pressed and we have jumps left.
         if (Input.GetButtonDown("Jump") && TotalJumps > 0)
         {
             playerRigidBody.velocity = new Vector2(playerRigidBody.velocity.x, jumpAmount);//Jump by setting upward velocity
@@ -38,22 +38,29 @@ public class PlayerCharacterController2 : MonoBehaviour
                     
         }
     }
-   
 
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //collision.gameObject.transform.position you also have transform.position
-        //playerRigidBody.AddForce(new Vector2(-2, 0), ForceMode2D.Impulse);
+        if (collision.gameObject.tag.Contains ("Bouncy"))
+        {
+            Debug.Log("Bounce has happened");
 
+            Vector2 bounceDirection = (transform.position - collision.transform.position).normalized;
+            GetComponent<Rigidbody2D>().AddForce(bounceDirection * BounceForce, ForceMode2D.Impulse);
+        }
 
-        if (collision.gameObject.name.Contains("Platform")) {
+        if (collision.gameObject.name.Contains("Platform")) 
+        {
             isOnPlatform = true;
             TotalJumps = 2;
         }
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         print("you just triggered: " + collision.gameObject.name);
+      
     }
 
     private void OnTriggerExit2D(Collider2D collision)
